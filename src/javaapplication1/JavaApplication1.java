@@ -5,7 +5,6 @@
  */
 package javaapplication1;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 /**
@@ -23,57 +22,49 @@ public class JavaApplication1 {
         Scanner in = new Scanner(System.in, "windows-1251");
         String name = in.nextLine();
         //String trueName = new String (name.getBytes(), "CP866"); //Чтобы не было кракозябров
-        System. out.println("Bot> Приветствую тебя, " + name);
-        System. out.println("Bot> " + name + ", а не хочешь поиграть со мной?" );
+        System.out.println("Bot> Приветствую тебя, " + name);
+        System.out.println("Bot> " + name + ", а не хочешь поиграть со мной?");
         String answer = in.nextLine();
-        if (answer.equals("Yes")) {
+        System.out.println(name + "> " + answer);
+        if (answer.equals("Да") || answer.equals("да")) {
             System.out.println("Bot> Ура! Со мной поиграют! ");
-            //float n = 0;
-            /*float n = 0;
-            System.out.println("Bot> Я считаю до семи:");
-            for (int i = 5; i >= 1; i--) {
-            System.out.println("Bot>" + i);
-            }*/
-            double n = Math.random();
-            n = (n * 4) + 1;
-            long botNumber = Math.round(n) ;
+            double n = Math.random();  //Генерируем число от 0 до 1 
+            n = (n * 4) + 1;  // Делаем от 0 до 1 
+            long botNumber = Math.round(n); // Округляем 
             System.out.println("Bot> Я загадол число от 1 до 5. Угадай какое?");
-            long myNumber = in.nextLong();
-            if (myNumber == botNumber) {
-                System.out.println("Bot> Ты угадал !");
-            }else{
-                if (myNumber > botNumber) {
-                    System.out.println("Bot> Моё число меньше ");
-                }else{
-                    System.out.println("Bot> Моё число больше ");
-                    
+
+            boolean winner = false;
+
+            for (int i = 3; i > 0; i--) {
+                long myNumber = in.nextLong(); // Читаем число
+                if (myNumber == botNumber) {
+                    System.out.println("Bot> Ты угадал ! Моё число действительно было " + botNumber);
+                    winner = true;
+                    break;
+                } else {
+                    if (myNumber > botNumber) {
+                        System.out.println("Bot> Моё число меньше ");
+                    } else {
+                        System.out.println("Bot> Моё число больше ");
+                    }
+
+                    if ((i - 1) != 0) {
+                        System.out.println("Bot> У вас осталось " + (i - 1) + " попыток");
+                    } else {
+                        System.out.println("Bot> У вас нет больше попыток");
+                    }
                 }
             }
-            long myNumber2 = in.nextLong();
-            if (myNumber == botNumber) {
-                System.out.println("Bot> Ты угадал !");
-            }else{
-                if (myNumber > botNumber) {
-                    System.out.println("Bot> Моё число меньше ");
-                }else{
-                    System.out.println("Bot> Моё число больше ");
-                    
-                }
-            }
-            long myNumber3 = in.nextLong();
-            if (myNumber == botNumber) {
-                System.out.println("Bot> Ты угадал !");
-            }else{
-                if (myNumber > botNumber) {
-                    System.out.println("Bot> Моё число меньше ");
-                }else{
-                    
-                }
+
+            if (winner) {
+                System.out.println("Bot> Поздравляю ! Ты победил ! ");
+            } else {
+                System.out.println("Bot> К сожелению ты проиграл . Моё число было " + botNumber);
             }
         } else {
             System.out.println("Bot> Прийдется сидеть скучать . ");
         }
-        
+
     }
-    
+
 }
